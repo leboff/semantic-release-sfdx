@@ -36,6 +36,7 @@
   "dependencies": {
     "@semantic-release/error": "^2.1.0",
     "execa": "^0.10.0",
+    "lodash": "^4.17.11",
     "sfdx-node": "^1.1.0"
   },
   "devDependencies": {

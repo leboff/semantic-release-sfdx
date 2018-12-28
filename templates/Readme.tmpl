@@ -1,0 +1,15 @@
+# SFDX  App
+
+| Name                | Id        | Package2 Id       | Subscriber Package2 Version Id    | Version        |
+| ------------------- | --------- | ----------------- | --------------------------------- | -------------- |
+| <%= Package2Name %> | <%= Id %> | <%= Package2Id %> | <%= SubscriberPackageVersionId %> | <%= Version %> |
+
+
+Sandbox Install
+
+Install Link: <%= InstallUrl.replace('login', 'test') %>
+
+Command Line
+`sfdx force:package:install --package <%= SubscriberPackageVersionId %> --targetusername <sandbox username>`
+
+
