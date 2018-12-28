@@ -1,0 +1,87 @@
+{
+  "name": "semantic-release-sfdx",
+  "description": "Set of semantic-release plugins to publish SFDX Package",
+  "version": "0.0.0-development",
+  "engines": {
+    "node": ">=8"
+  },
+  "author": "Bryan Leboff",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leboff/semantic-release-sfdx.git"
+  },
+  "bugs": {
+    "url": "https://github.com/leboff/semantic-release-sfdx/issues"
+  },
+  "homepage": "https://github.com/leboff/semantic-release-sfdx#readme",
+  "keywords": [
+    "sfdx",
+    "salesforce",
+    "registry",
+    "publish",
+    "push",
+    "semantic-release",
+    "version"
+  ],
+  "scripts": {
+    "lint": "eslint lib index.js",
+    "prettier": "prettier --write --list-different '**/*.js?(on)'",
+    "semantic-release": "semantic-release"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "@semantic-release/error": "^2.1.0",
+    "execa": "^0.10.0",
+    "sfdx-node": "^1.1.0"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^2.0.0",
+    "eslint": "^5.1.0",
+    "eslint-config-prettier": "^2.5.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-prettier": "^2.3.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "prettier": "1.13.7",
+    "semantic-release": "^15.4.1",
+    "validate-commit-msg": "^2.14.0"
+  },
+  "peerDependencies": {
+    "semantic-release": ">=11.0.0 <16.0.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "standard",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": 2
+    }
+  },
+  "files": [
+    "lib",
+    "scripts",
+    "index.js"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "bracketSpacing": true,
+    "trailingComma": "es5",
+    "semi": false
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
