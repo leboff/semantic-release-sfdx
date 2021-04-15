@@ -24,9 +24,45 @@ By default this plugin uses the DevHub which is set in your `defaultdevhubuserna
 
 To use another DevHub, set the environment variable `SFDX_DEFAULTDEVHUBUSERNAME` (see [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_dev_cli_env_variables.htm)).
 
+### Advanced Configuration
+
+**static config via `package.json`**
+
+```json
+{
+  "release": {
+    "plugins": [
+      [
+        "semantic-release-sfdx",
+        {
+          "promote": true,
+          "installationkey": "mysecretkey"
+        }
+      ]
+    ]
+  }
+}
+```
+
+**dynamic config via `release.config.js`**
+
+```javascript
+module.exports = {
+  plugins: [
+    [
+      'semantic-release-sfdx',
+      {
+        promote: process.env.PROMOTE_PACKAGE_VERSION === 'true',
+        installationkey: process.env.INSTALLATIONKEY,
+      },
+    ],
+  ],
+}
+```
+
 ### `verifyConditions`
 
-To disable the verification of your SFDX project and DevHub:
+To disable the verification of your SFDX project, DevHub and installationkey:
 
 ```json
 {
