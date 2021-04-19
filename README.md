@@ -35,6 +35,7 @@ To use another DevHub, set the environment variable `SFDX_DEFAULTDEVHUBUSERNAME`
       [
         "semantic-release-sfdx",
         {
+          "codecoverage": true,
           "promote": true,
           "installationkey": "mysecretkey"
         }
@@ -52,6 +53,7 @@ module.exports = {
     [
       'semantic-release-sfdx',
       {
+        codecoverage: process.env.PROMOTE_PACKAGE_VERSION === 'true',
         promote: process.env.PROMOTE_PACKAGE_VERSION === 'true',
         installationkey: process.env.INSTALLATIONKEY,
       },
