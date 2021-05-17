@@ -1,35 +1,91 @@
 # semantic-release-sfdx
 
-Set of [semantic-release](https://github.com/semantic-release/semantic-release) plugins for publishing an SFDX package
+> [semantic-release](https://github.com/semantic-release/semantic-release) plugin for publishing an SFDX package
 
+## Prerequisites
+
+You must have SFDX installed and connected to your DevHub (see Authorization in the [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth.htm)).
+
+## Configuration
+
+To enable this plugin, simply add the following to your `package.json` or [release configuration file](https://semantic-release.gitbook.io/semantic-release/usage/configuration).
 
 ```json
 {
   "release": {
-    "verifyConditions": "semantic-release-sfdx",
-    "publish": {
-      "devhubusername": "MyDevHub"
-    }
+    "plugins": ["semantic-release-sfdx"]
   }
 }
 ```
-## Windows Support Disclaimer
-Currently this plugin will only runs in *nix systems, as it uses shell scripts to log into google cloud. If you need Windows support Pull-requests are welcome.
 
+### DevHub
 
-## Configuration
+By default this plugin uses the DevHub which is set in your `defaultdevhubusername` sfdx config.
 
-You must have SFDX installed and connected to your dev hub
+To use another DevHub, set the environment variable `SFDX_DEFAULTDEVHUBUSERNAME` (see [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_dev_cli_env_variables.htm)).
 
-## Plugins
+### Advanced Configuration
+
+**static config via `package.json`**
+
+```json
+{
+  "release": {
+    "plugins": [
+      [
+        "semantic-release-sfdx",
+        {
+          "codecoverage": true,
+          "promote": true,
+          "installationkey": "mysecretkey"
+        }
+      ]
+    ]
+  }
+}
+```
+
+**dynamic config via `release.config.js`**
+
+```javascript
+module.exports = {
+  plugins: [
+    [
+      'semantic-release-sfdx',
+      {
+        codecoverage: process.env.PROMOTE_PACKAGE_VERSION === 'true',
+        promote: process.env.PROMOTE_PACKAGE_VERSION === 'true',
+        installationkey: process.env.INSTALLATIONKEY,
+      },
+    ],
+  ],
+}
+```
 
 ### `verifyConditions`
 
-Verify that all needed configuration is present and login to the dev hub
+To disable the verification of your SFDX project, DevHub and installationkey:
 
-### `publish`
+```json
+{
+  "release": {
+    "plugins": [
+      "semantic-release-sfdx",
+      {
+        "verifyConditions": false
+      }
+    ]
+  }
+}
+```
 
-Tag the image specified by `name` with the new version, create ne package version and update the `latest` tag.
+## Example
 
+See a second generation package being released with this plugin [here](https://github.com/mdapi-issues/managed-package-2nd-gen-dummy).
+
+- [package.json](https://github.com/mdapi-issues/managed-package-2nd-gen-dummy/blob/main/.github/workflows/default.yml)
+- [GitHub Actions configuration](https://github.com/mdapi-issues/managed-package-2nd-gen-dummy/blob/main/package.json)
+
+## Credits
 
 Thanks to https://github.com/carlos-cubas/semantic-release-gcp.git for kicking off point
